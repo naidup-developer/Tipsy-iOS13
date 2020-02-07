@@ -23,19 +23,17 @@ class ResultViewController: UIViewController {
         
         print("Tip :\(tip) - Splits : \(splits ) - Bill : \(bill )")
         
-        let step1 = bill * Double(tip)
         
-        let step2 = step1 / 100
         
-        let step3 = bill + step2
+        let billWithTip = bill + calTipPercentage(bill: bill, tipPercentage: tip)
         
-        let finalBill = step3 / Double(splits)
+        let splittedBill = billWithTip / Double(splits)
         
-        print("step 1 :\(step1) - step 2 : \(step2 ) - step 3 : \(step3 ) - Final Bill : \(finalBill)")
+        print("tip :\(calTipPercentage(bill: bill, tipPercentage: tip)) - billWithTip: \(billWithTip ) - Final Bill : \(splittedBill)")
         
         
         
-        resultLabel.text = String(format: "%.1f", finalBill)
+        resultLabel.text = String(format: "%.1f", splittedBill)
         
         descriptionLabel.text = "Split between \(splits) people, with \(tip)% tip."
         
@@ -46,6 +44,13 @@ class ResultViewController: UIViewController {
     
     @IBAction func onClickRecalculate(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func calTipPercentage(bill : Double, tipPercentage : Int) -> Double {
+        
+        let val = bill * Double(tipPercentage)
+        
+        return val / 100
     }
     
     
